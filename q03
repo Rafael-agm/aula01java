@@ -1,0 +1,76 @@
+import java.util.Scanner;
+
+class Produto {
+    String nome;
+    double preco;
+    int quantidadeEmEstoque;
+
+    // Método para adicionar estoque
+    public void adicionarEstoque(int quantidade) {
+        quantidadeEmEstoque += quantidade;
+    }
+
+    // Método para vender produto
+    public void venderProduto(int quantidade) {
+        if (quantidadeEmEstoque >= quantidade) {
+            quantidadeEmEstoque -= quantidade;
+            System.out.println("Venda realizada. Produtos restantes: " + quantidadeEmEstoque);
+        } else {
+            System.out.println("Estoque insuficiente.");
+        }
+    }
+
+    // Método para exibir estoque
+    public void exibirEstoque() {
+        System.out.println("Estoque atual de " + nome + ": " + quantidadeEmEstoque);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Produto produto = new Produto();
+
+        // Entrada de dados
+        System.out.print("Digite o nome do produto: ");
+        produto.nome = sc.nextLine();
+        System.out.print("Digite o preço do produto: ");
+        produto.preco = sc.nextDouble();
+        produto.quantidadeEmEstoque = 0;
+
+        // Menu de operações
+        int opcao;
+        do {
+            System.out.println("\nEscolha uma operação:");
+            System.out.println("1 - Adicionar estoque");
+            System.out.println("2 - Vender produto");
+            System.out.println("3 - Exibir estoque");
+            System.out.println("4 - Sair");
+            opcao = sc.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite a quantidade a adicionar ao estoque: ");
+                    int quantidade = sc.nextInt();
+                    produto.adicionarEstoque(quantidade);
+                    break;
+                case 2:
+                    System.out.print("Digite a quantidade a vender: ");
+                    quantidade = sc.nextInt();
+                    produto.venderProduto(quantidade);
+                    break;
+                case 3:
+                    produto.exibirEstoque();
+                    break;
+                case 4:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        } while (opcao != 4);
+
+        sc.close();
+    }
+}
+
