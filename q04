@@ -1,0 +1,86 @@
+import java.util.Scanner;
+
+class ContaBancaria {
+    double saldo;
+
+    // Método para consultar saldo
+    public void consultarSaldo() {
+        System.out.println("Saldo atual: " + saldo);
+    }
+
+    // Método para depositar
+    public void depositar(double valor) {
+        saldo += valor;
+        System.out.println("Depósito de " + valor + " realizado com sucesso.");
+    }
+
+    // Método para sacar
+    public void sacar(double valor) {
+        if (saldo >= valor) {
+            saldo -= valor;
+            System.out.println("Saque de " + valor + " realizado com sucesso.");
+        } else {
+            System.out.println("Saldo insuficiente.");
+        }
+    }
+
+    // Método para transferir
+    public void transferir(double valor, ContaBancaria contaDestino) {
+        if (saldo >= valor) {
+            saldo -= valor;
+            contaDestino.saldo += valor;
+            System.out.println("Transferência de " + valor + " realizada com sucesso.");
+        } else {
+            System.out.println("Saldo insuficiente.");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ContaBancaria conta = new ContaBancaria();
+        ContaBancaria contaDestino = new ContaBancaria();
+
+        int opcao;
+        do {
+            System.out.println("\nEscolha uma operação:");
+            System.out.println("1 - Consultar saldo");
+            System.out.println("2 - Depositar");
+            System.out.println("3 - Sacar");
+            System.out.println("4 - Transferir");
+            System.out.println("5 - Sair");
+            opcao = sc.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    conta.consultarSaldo();
+                    break;
+                case 2:
+                    System.out.print("Digite o valor a depositar: ");
+                    double deposito = sc.nextDouble();
+                    conta.depositar(deposito);
+                    break;
+                case 3:
+                    System.out.print("Digite o valor a sacar: ");
+                    double saque = sc.nextDouble();
+                    conta.sacar(saque);
+                    break;
+                case 4:
+                    System.out.print("Digite o valor a transferir: ");
+                    double transferencia = sc.nextDouble();
+                    conta.transferir(transferencia, contaDestino);
+                    break;
+                case 5:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        } while (opcao != 5);
+
+        sc.close();
+    }
+}
+
+
