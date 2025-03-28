@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+class Matematica {
+    public double soma(double a, double b) {
+        return a + b;
+    }
+
+    public double subtracao(double a, double b) {
+        return a - b;
+    }
+
+    public double divisao(double a, double b) {
+        if (b != 0) {
+            return a / b;
+        } else {
+            System.out.println("Erro: Divisão por zero!");
+            return 0;
+        }
+    }
+
+    public double multiplicacao(double a, double b) {
+        return a * b;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Matematica matematica = new Matematica();
+
+        System.out.println("Escolha a operação:");
+        System.out.println("1 - Soma");
+        System.out.println("2 - Subtração");
+        System.out.println("3 - Divisão");
+        System.out.println("4 - Multiplicação");
+        int opcao = sc.nextInt();
+
+        System.out.print("Digite o primeiro número: ");
+        double num1 = sc.nextDouble();
+        System.out.print("Digite o segundo número: ");
+        double num2 = sc.nextDouble();
+
+        switch (opcao) {
+            case 1:
+                System.out.println("Resultado: " + matematica.soma(num1, num2));
+                break;
+            case 2:
+                System.out.println("Resultado: " + matematica.subtracao(num1, num2));
+                break;
+            case 3:
+                System.out.println("Resultado: " + matematica.divisao(num1, num2));
+                break;
+            case 4:
+                System.out.println("Resultado: " + matematica.multiplicacao(num1, num2));
+                break;
+            default:
+                System.out.println("Opção inválida.");
+        }
+
+        sc.close();
+    }
+}
